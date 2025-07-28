@@ -14,7 +14,7 @@ export function SearchInput() {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: explanation
   useEffect(() => {
-    setFilters({ search: debouncedSearch, page: 1, status: filters.status })
+    setFilters({ ...filters, search: debouncedSearch, page: 1 })
   }, [debouncedSearch])
 
   return (

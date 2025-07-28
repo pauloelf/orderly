@@ -29,9 +29,9 @@ export function FilterDropdown() {
         <DropdownMenuRadioGroup
           onValueChange={(value) =>
             setFilters({
+              ...filters,
               status: value as FiltersProps['status'],
               page: 1,
-              search: filters.search,
             })
           }
           value={filters.status}

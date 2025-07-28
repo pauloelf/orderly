@@ -27,7 +27,10 @@ export function Pagination({ meta }: IMeta) {
 
   const handleChangePage = (page: number, isDisabled: boolean) => {
     if (!isDisabled) {
-      setFilters({ page, search: filters.search, status: filters.status })
+      setFilters({
+        ...filters,
+        page,
+      })
     }
   }
 
