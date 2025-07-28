@@ -1,15 +1,8 @@
-import { ChevronsUpDown } from 'lucide-react'
 import type { OrderProps } from '@/@types'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table'
 import { formatAmount } from '@/lib/formatters'
 import { Badge } from '../ui/badge'
+import { OrdersTableHeader } from './orders-table-header'
 
 interface IOrders {
   orders: OrderProps[] | undefined
@@ -18,22 +11,7 @@ interface IOrders {
 export function OrdersTable({ orders }: IOrders) {
   return (
     <Table>
-      <TableHeader>
-        <TableRow className="w-full">
-          <TableHead className="table-cell">Cliente</TableHead>
-          <TableHead className="table-cell">Status</TableHead>
-          <TableHead className="table-cell cursor-pointer items-center justify-end gap-1">
-            <div className="hidden items-center gap-1 md:flex">
-              Data
-              <ChevronsUpDown className="w-4" />
-            </div>
-          </TableHead>
-          <TableHead className="flex cursor-pointer items-center justify-end gap-1 text-right">
-            Valor
-            <ChevronsUpDown className="w-4" />
-          </TableHead>
-        </TableRow>
-      </TableHeader>
+      <OrdersTableHeader />
       <TableBody>
         {orders?.map((order) => (
           <TableRow key={order.id}>
