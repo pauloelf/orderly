@@ -1,9 +1,9 @@
 'use client'
 
-import { ChevronsDown, ChevronsUp, ChevronsUpDown } from 'lucide-react'
+import { ChevronDown, ChevronsUpDown, ChevronUp } from 'lucide-react'
 import type { FiltersProps } from '@/@types'
+import { TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useFilters } from '@/hooks/useFilters'
-import { TableHead, TableHeader, TableRow } from '../ui/table'
 
 export function OrdersTableHeader() {
   const { filters, setFilters } = useFilters()
@@ -14,7 +14,7 @@ export function OrdersTableHeader() {
     if (filters.sort === field) {
       value = `-${field}` as FiltersProps['sort']
     } else if (filters.sort === `-${field}`) {
-      value = undefined
+      value = 'id'
     } else if (field) {
       value = field
     }
@@ -28,22 +28,31 @@ export function OrdersTableHeader() {
 
   const getSortIcon = (field: FiltersProps['sort']) => {
     if (filters.sort === field) {
-      return <ChevronsUp className="w-4" />
+      return <ChevronUp className="w-4" />
     }
     if (filters.sort === `-${field}`) {
-      return <ChevronsDown className="w-4" />
+      return <ChevronDown className="w-4" />
     }
     return <ChevronsUpDown className="w-4" />
   }
 
   return (
-    <TableHeader>
+    <TableHeader className="max-lg:hidden">
       <TableRow className="w-full">
+        <TableHead
+          className="table-cell cursor-pointer items-center justify-end gap-1"
+          onClick={() => handleSort('id')}
+        >
+          <div className="flex items-center gap-1">
+            ID
+            {getSortIcon('id')}
+          </div>
+        </TableHead>
         <TableHead
           className="table-cell cursor-pointer items-center justify-end gap-1"
           onClick={() => handleSort('customer_name')}
         >
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="flex items-center gap-1">
             Cliente
             {getSortIcon('customer_name')}
           </div>
@@ -53,18 +62,21 @@ export function OrdersTableHeader() {
           className="table-cell cursor-pointer items-center justify-end gap-1"
           onClick={() => handleSort('order_date')}
         >
-          <div className="hidden items-center gap-1 md:flex">
+          <div className="flex items-center gap-1">
             Data
             {getSortIcon('order_date')}
           </div>
         </TableHead>
         <TableHead
-          className="flex cursor-pointer items-center justify-end gap-1 text-right"
+          className="table-cell cursor-pointer items-center justify-end gap-1"
           onClick={() => handleSort('amount_in_cents')}
         >
-          Valor
-          {getSortIcon('amount_in_cents')}
+          <div className="flex items-center gap-1">
+            Valor
+            {getSortIcon('amount_in_cents')}
+          </div>
         </TableHead>
+        <TableHead className="table-cell text-right">Ações</TableHead>
       </TableRow>
     </TableHeader>
   )
