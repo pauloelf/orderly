@@ -55,14 +55,17 @@ export function Pagination({ meta }: IMeta) {
           }
           if (link.label.includes('...')) {
             return (
-              <PaginationItem key={link.id}>
+              <PaginationItem className="max-md:hidden" key={link.id}>
                 <PaginationEllipsis />
               </PaginationItem>
             )
           }
 
           return (
-            <PaginationItem className="hidden md:inline-flex" key={link.id}>
+            <PaginationItem
+              className={`${link.active ? 'inline-flex' : 'hidden'} md:inline-flex`}
+              key={link.id}
+            >
               <PaginationLink
                 className="cursor-pointer"
                 isActive={link.active}
