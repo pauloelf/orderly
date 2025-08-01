@@ -9,7 +9,7 @@ export function useOrdersData(filters?: FiltersProps) {
       'orders',
       {
         page: filters?.page ?? 1,
-        sort: filters?.sort ?? '',
+        sort: filters?.sort ?? 'id',
         status: filters?.status ?? '',
         search: filters?.search ?? '',
       },

@@ -8,7 +8,7 @@ type FilterContextType = {
 
 export const DEFAULT_FILTERS: FiltersProps = {
   page: 1,
-  sort: '',
+  sort: 'id',
   status: '',
   search: '',
 }

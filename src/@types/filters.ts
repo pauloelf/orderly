@@ -1,6 +1,8 @@
 export type FiltersProps = {
   page?: number
   sort?:
+    | 'id'
+    | '-id'
     | 'customer_name'
     | '-customer_name'
     | 'order_date'
