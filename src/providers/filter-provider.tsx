@@ -28,6 +28,11 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
     const updated = { ...filters, ...newFilters }
     setInternalFilters(updated)
 
+    // biome-ignore lint/performance/useTopLevelRegex: explanation
+    if (pathname.match(/^\/orders\/\d+$/)) {
+      return
+    }
+
     // biome-ignore lint/complexity/noForEach: explanation
     Object.entries(newFilters).forEach(([key, v]) => {
       v ? params.set(key, String(v)) : params.delete(key)
