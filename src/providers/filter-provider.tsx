@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/performance/useTopLevelRegex: explanation */
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
@@ -28,8 +29,10 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
     const updated = { ...filters, ...newFilters }
     setInternalFilters(updated)
 
-    // biome-ignore lint/performance/useTopLevelRegex: explanation
-    if (pathname.match(/^\/orders\/\d+$/)) {
+    if (
+      pathname.match(/^\/orders\/\d+$/) ||
+      pathname.match(/^\/orders\/create$/)
+    ) {
       return
     }
 
