@@ -1,7 +1,7 @@
 'use client'
 
 import { Calendar, Clock, DollarSign, User } from 'lucide-react'
-import { useParams } from 'next/navigation'
+import { notFound, useParams } from 'next/navigation'
 import { OrderHeader } from '@/components/order/order-header'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -10,10 +10,13 @@ import { formatAmount, formatDate } from '@/lib/formatters'
 
 export default function OrderPage() {
   const params: { id: string } = useParams()
-  const { data, isLoading } = useOrderData(params.id || '')
+  const { data, isLoading, error } = useOrderData(params.id || '')
 
   if (isLoading) {
     return <p>Carregando...</p>
+  }
+  if (!data || error) {
+    notFound()
   }
   return (
     <>
