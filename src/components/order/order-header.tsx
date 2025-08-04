@@ -3,6 +3,7 @@
 import { ArrowLeft, Trash } from 'lucide-react'
 import Link from 'next/link'
 import type { OrderProps } from '@/@types'
+import { useDeleteOrder } from '@/hooks/useDeleteOrder'
 import { formatDate } from '@/lib/formatters'
 import { Button } from '../ui/button'
 
@@ -11,6 +12,7 @@ interface IOrderHeader {
 }
 
 export function OrderHeader({ order }: IOrderHeader) {
+  const { mutate } = useDeleteOrder()
   if (!order) {
     return null
   }
@@ -39,6 +41,7 @@ export function OrderHeader({ order }: IOrderHeader) {
         <Button
           aria-label="Excluir Pedido"
           className="cursor-pointer"
+          onClick={() => mutate(order.id)}
           size="lg"
           variant="destructive"
         >
