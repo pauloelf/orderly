@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import { FilterProvider } from '@/providers'
 
 export const metadata: Metadata = {
@@ -14,7 +15,9 @@ export default function OrdersLayout({
 }>) {
   return (
     <main aria-label="Conteúdo de Pedidos">
-      <FilterProvider>{children}</FilterProvider>
+      <Suspense fallback={<div>Carregando...</div>}>
+        <FilterProvider>{children}</FilterProvider>
+      </Suspense>
     </main>
   )
 }
